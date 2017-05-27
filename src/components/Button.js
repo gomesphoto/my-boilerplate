@@ -8,9 +8,9 @@ const StyledButton = styled.button`
   border: none;
   border-style: none;
   box-sizing: border-box;
-  border: ${({ outline }) => (outline) ? `1px solid rgb(${colors.dark})` : 'none'};
-  background-color: ${({ outline, white }) => (outline || white) ? `rgb(${colors.white})` : `rgb(${colors.dark})`};
-  color: ${({ outline, white }) => (outline || white) ? `rgb(${colors.dark})` : `rgb(${colors.white})`};
+  border: ${({ outline }) => (outline) ? `1px solid rgb(${colors.blue})` : 'none'};
+  background-color: ${({ outline, white }) => (outline || white) ? `rgb(${colors.white})` : `rgb(${colors.blue})`};
+  color: ${({ outline, white }) => (outline || white) ? `rgb(${colors.blue})` : `rgb(${colors.white})`};
   border-radius: ${({ round }) => round ? '24px' : '2px'};
   font-size: ${fonts.medium};
   font-weight: 400;

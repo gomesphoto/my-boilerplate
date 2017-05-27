@@ -5,7 +5,8 @@ export const colors = {
   grey: '221, 221, 221',
   lightGrey: '238, 238, 238',
   darkGrey: '128, 128, 128',
-  blue: '102, 173, 221',
+  blue: '97, 218, 251',
+  lightBlue: '197, 242, 255',
   gold: '246, 203, 71',
   green: '79, 180, 128',
   red: '221, 69, 65'
@@ -68,11 +69,11 @@ export const globalStyles = `
   }
 
   body {
-    background: rgb(${colors.lightGrey});
+    background: rgb(${colors.dark});
     font-family: Roboto, sans-serif;
     font-weight: 300;
     font-size: ${fonts.medium};
-    color: rgb(${colors.dark});
+    color: rgb(${colors.blue});
     position: relative;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-font-smoothing: antialiased;
@@ -96,6 +97,10 @@ export const globalStyles = `
   a {
     text-decoration: none;
     color: inherit;
+  }
+
+  div {
+    width: 100%;
   }
 
   * {

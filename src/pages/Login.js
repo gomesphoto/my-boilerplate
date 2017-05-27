@@ -7,7 +7,7 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import Wrapper from '../components/Wrapper';
 import Form from '../components/Form';
-import logo from '../assets/alpha-warehouse.svg';
+import logo from '../assets/logo.svg';
 import { authenticationLogin, authenticationUpdateEmail, authenticationUpdatePassword } from '../redux/_authentication';
 
 const StyledForm = styled(Form)`
@@ -15,7 +15,7 @@ const StyledForm = styled(Form)`
 `;
 
 const StyledLogo = styled.img`
-  width: 90%;
+  width: 50%;
 `;
 
 class Login extends Component {
@@ -26,7 +26,7 @@ class Login extends Component {
     return (
       <div>
         <Link to="/">
-          <StyledLogo src={logo} alt="Alpha Warehouse" />
+          <StyledLogo src={logo} alt="App Logo" />
         </Link>
         <Wrapper fetching={this.props.fetching}>
           <StyledForm onSubmit={this.onSubmit}>
