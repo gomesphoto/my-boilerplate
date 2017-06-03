@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { colors, fonts, transitions } from '../styles';
 
@@ -7,36 +8,44 @@ const StyledButton = styled.button`
   border: none;
   border-style: none;
   box-sizing: border-box;
-  border: 1px solid rgb(${colors.blue});
-  background-color: ${({ line }) => line ? `rgb(${colors.white})` : `rgb(${colors.blue})`};
-  color: ${({ line }) => line ? `rgb(${colors.blue})` : `rgb(${colors.white})`};
+  border: ${({ outline }) => (outline) ? `1px solid rgb(${colors.blue})` : 'none'};
+  background-color: ${({ outline, white }) => (outline || white) ? `rgb(${colors.white})` : `rgb(${colors.blue})`};
+  color: ${({ outline, white }) => (outline || white) ? `rgb(${colors.blue})` : `rgb(${colors.white})`};
+  border-radius: ${({ round }) => round ? '24px' : '2px'};
   font-size: ${fonts.medium};
-  border-radius: 23px;
-  font-weight: 500;
+  font-weight: 400;
   padding: 10px;
-  margin: 5px;
+  margin: 5px auto;
   width: 150px;
   height: 36px;
   cursor: pointer;
   will-change: transform;
-  &:hover {
-    transform: scale(1.02);
+
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.6;
+    }
   }
 `;
 
-const Button = ({ text, line, ...otherProps }) => (
-  <StyledButton line={line} {...otherProps}>
+const Button = ({ text, outline, white, round, ...otherProps }) => (
+  <StyledButton outline={outline} white={white} round={round} {...otherProps}>
     {text}
   </StyledButton>
 );
 
 Button.propTypes = {
-  text: PropTypes.string.isRequired,
-  line: PropTypes.bool
+  text: PropTypes.string,
+  outline: PropTypes.bool,
+  white: PropTypes.bool,
+  round: PropTypes.bool
 };
 
 Button.defaultProps = {
-  line: false
+  text: '',
+  outline: false,
+  white: false,
+  round: false
 };
 
 export default Button;

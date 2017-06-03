@@ -1,11 +1,12 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { colors, transitions, fonts } from '../styles';
 
 const StyledContainer = styled.div`
-  border-bottom: 1px solid rgb(${colors.darkGrey});
+  border-bottom: 1px solid rgb(${colors.blue});
   position: relative;
-  margin: 25px 0;
+  margin-bottom: 25px;
   transition: ${transitions.base};
 
   &::after {
@@ -48,7 +49,7 @@ const StyledLabel = styled.label`
   pointer-events: none;
   top: 0;
   left: 0;
-  color: rgb(${({ focus }) => focus ? colors.blue : colors.darkGrey});
+  color: rgb(${({ focus }) => focus ? colors.blue : colors.lightBlue});
   transition: ${transitions.base};
   transform-origin: left;
   transform: ${({ focus, content }) => (focus || content) ? 'translateY(-8px) scale(0.7)' : 'translateY(8px) scale(1)'};
@@ -62,12 +63,13 @@ const StyledInput = styled.input`
   border-style: none;
   box-sizing: border-box;
   border-radius: 2px;
-  margin: 5px 0;
+  margin: 6px 0;
   width: 100%;
+  color: rgb(${colors.lightBlue});
   font-weight: 400;
   font-size: ${fonts.medium};
   &::placeholder {
-    color: rgb(${colors.darkGrey})l
+    color: rgb(${colors.lightBlue});
   }
 `;
 

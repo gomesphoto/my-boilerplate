@@ -1,21 +1,24 @@
 /**
  * @desc create authenticated user session
+ * @param  {String} [uid='']
  * @param  {String} [email='']
+ * @param  {String} [profile='']
  * @param  {Date} [expires=Date.now()]
- * @param  {Array} profile
  * @return {Session}
  */
 export const setSession = (
+  uid = '',
   email = '',
+  displayName = '',
   expires = Date.now(),
-  profile: [],
   ) => {
   const session = {
+    uid,
     email,
+    displayName,
     expires,
-    profile
   };
-  localStorage.setItem('BLEAN_SESSION', JSON.stringify(session));
+  localStorage.setItem('USER_SESSION', JSON.stringify(session));
 };
 
 /**
@@ -23,27 +26,26 @@ export const setSession = (
  * @return {Object}
  */
 export const getSession = () => {
-  const session = localStorage.getItem('BLEAN_SESSION');
+  const session = localStorage.getItem('USER_SESSION');
   return JSON.parse(session);
 };
 
 /**
  * @desc update profile in session
- * @param  {Array}  [profile=[]]
+ * @param  {String}  [profile='']
  * @return {Session}
  */
-export const updateProfile = (profile = []) => {
+export const updateProfile = (profile = '') => {
   const newSession = { ...getSession(), profile };
-  return localStorage.setItem('BLEAN_SESSION', JSON.stringify(newSession));
+  return localStorage.setItem('USER_SESSION', JSON.stringify(newSession));
 };
-
 
 /**
  * @desc delete session
  * @return {Void}
  */
 export const deleteSession = () => {
-  localStorage.removeItem('BLEAN_SESSION');
+  localStorage.removeItem('USER_SESSION');
 };
 
 /**
@@ -71,39 +73,6 @@ export const clearSessionExpireWarning = () => {
 };
 
 /**
- * @desc create onboarding user session
- * @param {String} [email='']
- * @param {Date} [expires=Date.now()]
- * @return {Void}
- */
-export const setOnboardingSession = (
-  email = '',
-  expires = Date.now(),
-) => {
-  localStorage.setItem('BLEAN_ONBOARDING_SESSION', JSON.stringify({
-    email,
-    expires,
-  }));
-};
-
-/**
- * @desc get session as an object
- * @return {Object}
- */
-export const getOnboardingSession = () => {
-  const onboardingSession = localStorage.getItem('BLEAN_ONBOARDING_SESSION');
-  return JSON.parse(onboardingSession);
-};
-
-/**
- * @desc delete session
- * @return {Void}
- */
-export const deleteOnboardingSession = () => {
-  localStorage.removeItem('BLEAN_ONBOARDING_SESSION');
-};
-
-/**
  * @desc refresh sesion tokens
  * @return {Void}
  */
@@ -119,7 +88,7 @@ export const refreshSession = () => {
   };
 
   if (auth) {
-    localStorage.setItem('BLEAN_SESSION', getRefreshedSession(auth, 300000)); // 5 min
+    localStorage.setItem('USER_SESSION', getRefreshedSession(auth, 300000)); // 5 min
     return refreshTimeout(240000); // 4 min
   }
 };

@@ -1,8 +1,10 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
   width: 100%;
+  padding: 10px;
 `;
 
 class Form extends Component {
@@ -15,16 +17,23 @@ class Form extends Component {
     this.props.onSubmit(event);
   };
 
-  render = () => (
-    <StyledForm onSubmit={this.onSubmitForm}>
-      {this.props.children}
-    </StyledForm>
-  )
+  render = () => {
+    const { children, ...otherProps } = this.props;
+    return (
+      <StyledForm {...otherProps} onSubmit={this.onSubmitForm}>
+        {children}
+      </StyledForm>
+    );
+  }
 }
 
 Form.propTypes = {
   children: PropTypes.node.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func
+};
+
+Form.defaultProps = {
+  onSubmit: () => {}
 };
 
 export default Form;

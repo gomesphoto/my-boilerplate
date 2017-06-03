@@ -4,7 +4,9 @@ export const colors = {
   dark: '34, 34, 34',
   grey: '221, 221, 221',
   lightGrey: '238, 238, 238',
-  blue: '102, 173, 221',
+  darkGrey: '128, 128, 128',
+  blue: '97, 218, 251',
+  lightBlue: '197, 242, 255',
   gold: '246, 203, 71',
   green: '79, 180, 128',
   red: '221, 69, 65'
@@ -61,16 +63,17 @@ export const globalStyles = `
 
   html, body, #root, #router-root {
     height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
   }
 
   body {
-    background-color: rgb(${colors.lightGrey});
+    background: rgb(${colors.dark});
     font-family: Roboto, sans-serif;
     font-weight: 300;
     font-size: ${fonts.medium};
-    color: rgb(${colors.dark});
+    color: rgb(${colors.blue});
     position: relative;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-font-smoothing: antialiased;
@@ -97,7 +100,11 @@ export const globalStyles = `
   }
 
   div {
-    box-sizing: border-box;
+    width: 100%;
+  }
+
+  * {
+    box-sizing: border-box !important;
   }
 
   button {

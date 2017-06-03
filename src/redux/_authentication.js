@@ -14,23 +14,21 @@ const AUTHENTICATION_UPDATE_PASSWORD = 'authentication/AUTHENTICATION_UPDATE_PAS
 export const authenticationLogin = (email, password) =>
   (dispatch) => {
     dispatch({ type: AUTHENTICATION_REQUEST });
-    apiLogin(email, password)
-    .then(({ data: profilesData }) => {
+    const authHandler = (error, user) => {
+      if (error) return dispatch({ type: AUTHENTICATION_FAILURE });
       setSession(
-        profilesData.email,
+        user.uid,
+        user.email,
+        user.profile,
         Date.now() + 300000, // 5 minutes
-        Date.now() + 3000000, // 50 minutes
-        profilesData.profile,
       );
       dispatch({
         type: AUTHENTICATION_SUCCESS,
-        payload: getSession().profile
+        payload: getSession()
       });
-      window.router.transitionTo('/dashboard/home');
-    })
-    .catch((error) => {
-      dispatch({ type: AUTHENTICATION_FAILURE });
-    });
+      window.browserHistory.push('/dashboard');
+    };
+    apiLogin(email, password, authHandler);
   };
 
 export const authenticationLogout = () =>
@@ -40,7 +38,7 @@ export const authenticationLogout = () =>
     .then(() => {
       deleteSession();
       dispatch({ type: AUTHENTICATION_SIGNOUT_SUCCESS });
-      window.router.transitionTo('/login');
+      window.browserHistory.push('/login');
       window.rogueDispatch({ type: 'RESET' });
     });
   };
@@ -59,9 +57,10 @@ export const authenticationUpdatePassword = password => ({
 // -- Reducer --------------------------------------------------------------- //
 const INITIAL_STATE = {
   fetching: false,
+  uid: '',
   email: '',
   password: '',
-  profile: []
+  profile: ''
 };
 
 export const authenticationReducer = (state = INITIAL_STATE, action) => {
@@ -70,9 +69,23 @@ export const authenticationReducer = (state = INITIAL_STATE, action) => {
     case AUTHENTICATION_SIGNOUT_REQUEST:
       return { ...state, fetching: true };
     case AUTHENTICATION_SUCCESS:
-      return { ...state, fetching: false, password: '', email: '', profile: action.payload || '' };
+      return {
+        ...state,
+        fetching: false,
+        password: '',
+        uid: action.payload.uid,
+        email: action.payload.email,
+        profile: action.payload.profile
+      };
     case AUTHENTICATION_SIGNOUT_SUCCESS:
-      return { ...state, fetching: false, password: '', email: '', profile: [] };
+      return {
+        ...state,
+        fetching: false,
+        password: '',
+        uid: '',
+        email: '',
+        profile: ''
+      };
     case AUTHENTICATION_FAILURE:
       return { ...state, fetching: false };
     case AUTHENTICATION_UPDATE_EMAIL:
