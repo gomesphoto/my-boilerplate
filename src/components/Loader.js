@@ -20,7 +20,7 @@ const StyledLoader = styled.div`
   height: 8em;
   border-radius: 50%;
   background: rgb(${colors.blue});
-  background: linear-gradient(to right, rgb(${colors.blue}) 10%, rgba(255, 255, 255, 0) 42%);
+  background: linear-gradient(to right, rgb(${colors.blue}) 10%, rgba(${colors.dark}, 0) 42%);
   animation: ${load} 1.4s infinite linear;
   transform: translateZ(0);
 
@@ -36,7 +36,7 @@ const StyledLoader = styled.div`
   }
 
   &:after {
-    background: rgb(${colors.lightGrey});
+    background: rgb(${colors.dark});
     width: 75%;
     height: 75%;
     border-radius: 50%;
@@ -50,8 +50,6 @@ const StyledLoader = styled.div`
   }
 `;
 
-const Loader = () => (
-  <StyledLoader />
-);
+const Loader = () => <StyledLoader />;
 
 export default Loader;
