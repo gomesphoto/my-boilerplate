@@ -1,19 +1,19 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { authenticationLogout } from '../redux/_authentication';
+import { authLogout } from '../reducers/_auth';
 import { deleteSession } from '../helpers/utilities';
 
 class Logout extends Component {
   componentWillMount() {
-    this.props.authenticationLogout();
+    this.props.authLogout();
     deleteSession();
   }
   render = () => null;
 }
 
 Logout.propTypes = {
-  authenticationLogout: PropTypes.func.isRequired
+  authLogout: PropTypes.func.isRequired
 };
 
-export default connect(null, { authenticationLogout })(Logout);
+export default connect(null, { authLogout })(Logout);

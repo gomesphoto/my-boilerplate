@@ -4,14 +4,10 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import ReduxThunk from 'redux-thunk';
-import ReduxReset from './libraries/redux-reset';
-import reducers from './redux';
+import reducers from './reducers';
 import Router from './Router';
 
-const store = createStore(reducers,
-  composeWithDevTools(applyMiddleware(ReduxThunk), ReduxReset())
-);
-
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(ReduxThunk)));
 
 const Root = () => (
   <Provider store={store}>

@@ -8,55 +8,53 @@ import Button from '../components/Button';
 import Wrapper from '../components/Wrapper';
 import Form from '../components/Form';
 import logo from '../assets/logo.svg';
-import { authenticationLogin, authenticationUpdateEmail, authenticationUpdatePassword } from '../redux/_authentication';
+import { authLogin, authUpdateEmail, authUpdatePassword } from '../reducers/_auth';
 
-const StyledForm = styled(Form)`
-  padding: 25px;
-`;
+const StyledLogin = styled.div`width: 100%;`;
 
-const StyledLogo = styled.img`
-  width: 50%;
-`;
+const StyledForm = styled(Form)`padding: 25px;`;
+
+const StyledLogo = styled.img`width: 50%;`;
 
 class Login extends Component {
   onSubmit = () => {
-    this.props.authenticationLogin(this.props.email, this.props.password);
-  }
+    this.props.authLogin(this.props.email, this.props.password);
+  };
   render() {
     return (
-      <div>
+      <StyledLogin>
         <Link to="/">
           <StyledLogo src={logo} alt="App Logo" />
         </Link>
         <Wrapper fetching={this.props.fetching}>
           <StyledForm onSubmit={this.onSubmit}>
-            <Input label="Email" type="email" onValueChange={value => this.props.authenticationUpdateEmail(value)} />
-            <Input label="Password" type="password" onValueChange={value => this.props.authenticationUpdatePassword(value)} />
+            <Input label="Email" type="email" onValueChange={value => this.props.authUpdateEmail(value)} />
+            <Input label="Password" type="password" onValueChange={value => this.props.authUpdatePassword(value)} />
             <Button type="submit" text="Login" round />
           </StyledForm>
         </Wrapper>
-      </div>
+      </StyledLogin>
     );
   }
 }
 
 Login.propTypes = {
-  authenticationLogin: PropTypes.func.isRequired,
-  authenticationUpdateEmail: PropTypes.func.isRequired,
-  authenticationUpdatePassword: PropTypes.func.isRequired,
+  authLogin: PropTypes.func.isRequired,
+  authUpdateEmail: PropTypes.func.isRequired,
+  authUpdatePassword: PropTypes.func.isRequired,
   fetching: PropTypes.bool.isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired
 };
 
-const reduxProps = ({ authentication }) => ({
-  fetching: authentication.fetching,
-  email: authentication.email,
-  password: authentication.password
+const reduxProps = ({ auth }) => ({
+  fetching: auth.fetching,
+  email: auth.email,
+  password: auth.password
 });
 
 export default connect(reduxProps, {
-  authenticationLogin,
-  authenticationUpdateEmail,
-  authenticationUpdatePassword
+  authLogin,
+  authUpdateEmail,
+  authUpdatePassword
 })(Login);

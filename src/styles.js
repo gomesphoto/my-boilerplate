@@ -14,13 +14,15 @@ export const colors = {
 
 export const fonts = {
   small: '12px',
-  medium: '14px',
-  large: '16px',
-  h1: '30px',
-  h2: '28px',
+  medium: '16px',
+  large: '18px',
+  big: '22px',
+  h1: '42px',
+  h2: '32px',
   h3: '24px',
-  h4: '18px',
-  h5: '16px'
+  h4: '20px',
+  h5: '17px',
+  h6: '14px'
 };
 
 export const transitions = {
@@ -29,32 +31,22 @@ export const transitions = {
   long: 'all 0.3s ease-in-out'
 };
 
-export const padding = {
-  smallPadding: '15px',
-  mediumPadding: '25px',
-  largePadding: '50px'
-};
-
 export const responsive = {
-  xxs: {
-    min: 'min-width: 319px',
-    max: 'max-width: 320px'
-  },
   xs: {
     min: 'min-width: 479px',
     max: 'max-width: 480px'
   },
   sm: {
-    min: 'min-width: 767px',
-    max: 'max-width: 768px'
+    min: 'min-width: 639px',
+    max: 'max-width: 640px'
   },
   md: {
-    min: 'min-width: 991px',
-    max: 'max-width: 992px'
+    min: 'min-width: 959px',
+    max: 'max-width: 960px'
   },
   lg: {
-    min: 'min-width: 1199px',
-    max: 'max-width: 1200px'
+    min: 'min-width: 1023px',
+    max: 'max-width: 1024px'
   }
 };
 
@@ -71,13 +63,18 @@ export const globalStyles = `
   body {
     background: rgb(${colors.dark});
     font-family: Roboto, sans-serif;
-    font-weight: 300;
+    font-weight: 400;
+    font-style: normal;
+  	font-stretch: normal;
     font-size: ${fonts.medium};
-    color: rgb(${colors.blue});
-    position: relative;
+    color: rgb(${colors.dark});
+    overflow-y:auto;
+    text-rendering: optimizeLegibility;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  	-webkit-text-size-adjust: 100%;
+    -webkit-overflow-scrolling: touch;
   }
 
   button:active,
@@ -94,13 +91,41 @@ export const globalStyles = `
     height: 100%;
   }
 
+  a, p, h1, h2, h3, h4, h5, h6 {
+  	text-decoration: none;
+  	margin: 0;
+  	padding: 0;
+  }
+
+  h1 {
+    font-size: ${fonts.h1}
+  }
+  h2 {
+    font-size: ${fonts.h2}
+  }
+  h3 {
+    font-size: ${fonts.h3}
+  }
+  h4 {
+    font-size: ${fonts.h4}
+  }
+  h5 {
+    font-size: ${fonts.h5}
+  }
+  h6 {
+    font-size: ${fonts.h6}
+  }
+
   a {
     text-decoration: none;
     color: inherit;
+    outline: none;
   }
 
-  div {
-    width: 100%;
+  ul, li {
+  	list-style: none;
+  	margin: 0;
+  	padding: 0;
   }
 
   * {
